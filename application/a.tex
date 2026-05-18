@@ -1,0 +1,194 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\begin{document}
+
+Today I will show you an application of the Hahn-Banach Theorem to partial differential equations (PDEs). I learned this application in a seminar in functional analysis, run by Haim Brezis, that I was fortunate to attend in the spring of 2008 at the Technion.
+
+As often happens with serious applications of functional analysis, there is some preparatory material to go over, namely, weak solutions to PDEs.
+
+\bigskip
+
+\noindent
+\textbf{1. Weak solutions to PDEs}
+
+In our university, Ben-Gurion University of the Negev, Pure Math majors can finish their studies without taking a single course in physics. Therefore I will say the obvious: partial differential equations are one of the most important and useful branches of mathematics. It is a huge subject. When working in PDEs one requires an arsenal of different tools, and functional analysis is just one of the many tools that PDE specialists use.
+
+Since my only goal here is to give an example, and so as to be very very concrete, I will discuss only one PDE, the PDE
+
+\[
+(*) \quad \mathrm{div}(u) = F.
+\]
+
+Here the function \(u = (u_1, u_2)\) is a vector valued function on the plane 
+\[
+u: \mathbb{R}^2 \to \mathbb{R}^2,
+\]
+\(F\) is a scalar valued function on the plane
+\[
+F: \mathbb{R}^2 \to \mathbb{R},
+\]
+and \(\mathrm{div}\) is the divergence operator
+\[
+\mathrm{div}(u) 
+= \frac{\partial u_1}{\partial x} + \frac{\partial u_2}{\partial y}.
+\]
+
+In its simplest form, the problem is: given a specified function \(F\), does there exist a solution \(u\) that satisfies \(\mathrm{div}(u) = F\)?
+
+Classically, a solution to equation \((*)\) means a differentiable function \(u\) (meaning that both \(u_1\) and \(u_2\) are differentiable functions) such that
+\[
+\mathrm{div}(u)(x,y) 
+= \frac{\partial u_1}{\partial x}(x,y) + \frac{\partial u_2}{\partial y}(x,y) 
+= F(x,y)
+\]
+holds for every \((x,y)\in \mathbb{R}^2\). The question whether a classical solution exists or not is a respectable mathematical question, but as I noted above, PDEs arise in applications and exist for applications, and it is sometimes not reasonable to expect that the solution will be differentiable or even continuous. So one is led to consider weak solutions, that is, functions \(u\) which are not differentiable, but which solve the PDE \((*)\) in some sense.
+
+(There is another reason to consider weak solutions besides the need that arises in applications: sometimes the existence of a classical solutions is shown in two steps. First step: a weak solution is shown to exist. Second step: the weak solution is shown to enjoy some regularity properties and is shown to be a solution in the classical case).
+
+In what sense? Assume that \(F \in C = C(\mathbb{R}^2)\) and that \(u \in C^1 = C^1(\mathbb{R}^2)\) is a solution to \((*)\). It then follows that for every smooth function 
+\(w \in C_c^\infty(\mathbb{R}^2)\)
+(i.e., \(w\) is an infinitely differentiable compactly supported function; sometimes such functions \(w\) are called test functions) the following holds:
+
+\[
+(**) \quad 
+\int \Bigl(\frac{\partial u_1}{\partial x}(x,y) + \frac{\partial u_2}{\partial y}(x,y)\Bigr)\, w(x,y)\, dx\,dy 
+= \int F(x,y)\, w(x,y)\, dx\,dy.
+\]
+
+In fact, if \(F \in C\), then \(u \in C^1\) is a classical solution to \((*)\) if and only if the above equality of integrals holds for every \(w \in C_c^\infty\). This follows from the following exercise.
+
+\medskip
+\noindent
+\textbf{Exercise A:} A function \(f \in C(\mathbb{R}^n)\) is everywhere zero if and only if for all \(w \in C_c^\infty(\mathbb{R}^n)\), \(\int f w = 0\).
+
+\medskip
+
+If we integrate \((**)\) by parts, we find that \(u\) is a classical solution to \((*)\) if and only if
+\[
+- \int \bigl(u_1\, w_x + u_2\, w_y\bigr) 
+= \int F\, w
+\]
+or
+\[
+(*') \quad \int u \cdot \nabla w = -\int F\, w,
+\]
+for all \(w \in C_c^\infty\). So \((*)\) is equivalent to \((*')\) for \(u \in C^1\) and \(F \in C\) (here \(\nabla w = (w_x, w_y)\) is the gradient of \(w\)). But \((*')\) makes sense also if \(u\) and \(F\) are merely locally integrable. Thus for a locally integrable \(F\), we say that a locally integrable function \(u\) is a weak solution to \((*)\) if it satisfies \((*')\). Experience has shown that this is a reasonable notion of solution to the original PDE.
+
+Now we are free to study \((*')\) where \(F\) belongs to a certain class of functions, and ask whether a solution \(u\) in a given class of functions exists. We will now show that for every \(F \in L^2\) there exists an \(F \in L^\infty\) such that \(u\) is a weak solution to \(\mathrm{div}(u) = F\).
+
+There are other notions of generalized solutions, see also Terry Tao’s PCM article or the Wikipedia article.
+
+\bigskip
+
+\noindent
+\textbf{2. The existence of \(\boldsymbol{L^\infty}\) solutions to \(\mathrm{div}(u) = F\)}
+
+Let us fix some notation. For simplicity, let all our functions be real valued. We let \(L^1 \oplus L^1\) denote the space of all pairs \((f,g)\), where \(f,g \in L^1(\mathbb{R}^2)\). We equip this space with the norm
+\[
+\|(f,g)\| = \|f\|_1 + \|g\|_1.
+\]
+Likewise, \(L^\infty \oplus L^\infty\) is the space of pairs of functions with the norm
+\[
+\|(f,g)\| = \max\{\|f\|_\infty, \|g\|_\infty\}.
+\]
+
+\medskip
+\noindent
+\textbf{Exercise B:} \(L^1 \oplus L^1\) is a Banach space, and \(\bigl(L^1 \oplus L^1\bigr)^* = L^\infty \oplus L^\infty\).
+
+\medskip
+\noindent
+\textbf{Theorem 1:} For every \(F \in L^2\), there exists a \(u = (u_1, u_2) \in L^\infty \oplus L^\infty\) such that (in the weak sense) it solves the PDE \(\mathrm{div}(u) = F\).
+
+\medskip
+\noindent
+\textbf{Proof:}
+Let \(M \subset L^1 \oplus L^1\) be the space
+\[
+M = \{(f,g) \in L^1 \oplus L^1 : \exists\, w \in C_c^\infty \text{ such that }(f,g) = \nabla w\}.
+\]
+Since \(M\) is the range of a linear map, it is a linear subspace of \(L^1 \oplus L^1\). The following exercise is not difficult.
+
+\medskip
+\noindent
+\textbf{Lemma 2:} If \((f,g) \in M\), then there is a unique \(w \in C_c^\infty\) for which \((f,g) = \nabla w\). The map \((f,g)\mapsto w\) is linear and bounded as a map from \(M \subset L^1 \oplus L^1\) into \(L^2\).
+
+\medskip
+
+Assume the lemma for now, and let us proceed with the proof of the theorem. On \(M\) we define the linear functional
+\[
+\phi : M \to \mathbb{R}
+\]
+by
+\[
+\phi(f,g) = -\int F\, w,
+\]
+where \(w \in C_c^\infty\) is such that \((f,g) = \nabla w\). Now since \(F \in L^2\) by assumption, the map \(w \mapsto -\int F w\) is a bounded functional on \(L^2\). Using this fact together with Lemma 2 we conclude that \(\phi\) (which is nothing but the composition of the map 
+\[
+M \ni (\nabla w) \mapsto w \in L^2
+\]
+with the map
+\[
+L^2 \ni w \mapsto -\int Fw
+\]
+) is a well-defined, linear, and bounded functional on \(M \subset L^1 \oplus L^1\). By the Hahn-Banach extension theorem (Theorem 12 in Notes 6), \(\phi\) extends to a bounded functional \(\Phi\) on \(L^1 \oplus L^1\). By Exercise B, there exists a \(u \in L^\infty \oplus L^\infty\) such that
+\[
+\Phi(f,g) = \int (u_1 f + u_2 g)
+\]
+for all \((f,g)\in L^1 \oplus L^1\). Restricting only to elements of the form \((f,g) = \nabla w \in M\), we find that
+\[
+\int u \cdot \nabla w = \phi(\nabla w) = - \int F\, w
+\]
+for all \(w \in C_c^\infty\). In other words, \(u \in L^\infty \oplus L^\infty\) is a weak solution to the equation \(\mathrm{div}(u) = F\).
+
+This may seem a little magical, but don’t forget that we still haven’t proved Lemma 2. Lemma 2 is a typical example of an estimate that one has to prove in order to apply functional analysis to PDEs, and falls under the wide umbrella of the Sobolev–Nirenberg inequalities.
+
+\medskip
+\noindent
+\textbf{Proof of Lemma 2:} Since the gradient operator \(\nabla : C^\infty \to C^\infty \oplus C^\infty\) annihilates only constant functions, its restriction to \(C_c^\infty\) has no kernel. Therefore, the linear transformation \(\nabla : C_c^\infty \to M\) has a linear inverse \(\nabla^{-1} : M \to C_c^\infty\) which sends every \((f,g) \in M\) to the unique \(w \in C_c^\infty\) such that \(\nabla w = (f,g)\). The only nontrivial issue is boundedness with respect to the appropriate norms.
+
+The operator \(\nabla^{-1}\) actually has a nice formula:
+\[
+\nabla^{-1}(f,g)(x,y) = \int_{-\infty}^x f(t,y)\, dt.
+\]
+Thus, if \(w \in C_c^\infty\), we have
+\[
+w(x,y) = \int_{-\infty}^x \frac{d\,w}{d\,x}(t,y)\, dt.
+\]
+We obtain the estimate
+\[
+|w(x,y)| \le \int_{-\infty}^\infty 
+\biggl|\frac{d\,w}{d\,x}(t,y)\biggr|\,
+dt.
+\]
+Similarly,
+\[
+|w(x,y)| \le \int_{-\infty}^\infty
+\biggl|\frac{d\,w}{d\,y}(x,s)\biggr|\, ds.
+\]
+Multiplying these two estimates, we get
+\[
+|w(x,y)|^2 \,\le\,
+\left(\int_{-\infty}^\infty 
+\bigl|\tfrac{d\,w}{d\,x}(t,y)\bigr|\,
+dt\right)
+\times
+\left(\int_{-\infty}^\infty 
+\bigl|\tfrac{d\,w}{d\,y}(x,s)\bigr|\,
+ds\right).
+\]
+Integrating with respect to \(x\) and \(y\), we obtain
+\[
+\|w\|_2^2 \,\le\,
+\left\|\frac{\partial w}{\partial x}\right\|_1
+\left\|\frac{\partial w}{\partial y}\right\|_1
+\,\le\, \frac12
+\|\nabla w\|_{L^1 \oplus L^1}^2,
+\]
+as required.
+
+\end{document}
