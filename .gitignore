@@ -1,7 +1,6 @@
 ## Core latex/pdflatex auxiliary files:
 *.codex
 .codex
-*.md
 *.aux
 *.lof
 *.log
